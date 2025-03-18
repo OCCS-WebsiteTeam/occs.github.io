@@ -1,0 +1,141 @@
+
+header {
+    position: sticky;
+    text-align: left;
+    top: 0;
+    z-index: 100;
+    padding: 10px 20px;
+}
+
+.headerComponent {
+    z-index: 100;
+    color: white;
+    background-color: black;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logoContainer {
+    display: block;
+}
+
+.logoLink {
+    display: inline-block;
+    font-size: 24px;
+    margin: 0;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    position: relative;
+    text-decoration: none;
+    color: white;
+    padding: 15px 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline-block;
+    overflow: hidden;
+    text-align: center;
+    font-size: large;
+    font-weight: 800;
+}
+
+.nav-links a span, .logoLink span {
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.nav-links a span:nth-child(1), .logoLink span:nth-child(1) {
+    color: red;
+    --glitch-translate: -3px;
+}
+.nav-links a span:nth-child(2), .logoLink span:nth-child(2) {
+    color: blue;
+    --glitch-translate: 3px;
+}
+.nav-links a span:nth-child(3), .logoLink span:nth-child(3) {
+    color: white;
+    --glitch-translate: 0;
+}
+
+
+.nav-links a:hover span{
+    animation: glitch 250ms step-start alternate;
+}
+
+.logoLink span {
+    animation: glitchLogo 10s step-start infinite;
+}
+
+@keyframes glitchLogo {
+    0% {
+        clip-path: inset(0); /* Start fully visible */
+    }
+    95% {
+        clip-path: inset(0); /* Keep it fully visible until near the end */
+        transform: none;
+    }
+    98% {
+        clip-path: inset(20% 0 40% 0);
+        transform: translateX(calc(var(--glitch-translate) * -1));
+    }
+    99% {
+        clip-path: inset(40% 0 0 0);
+        transform: none;
+        transform: translateX(var(--glitch-translate));
+    }
+    100% {
+        clip-path: inset(0); /* Reset clip-path to normal */
+        transform: none;
+    }
+}
+
+
+@keyframes glitch {
+    0% {
+        clip-path: inset(0 0 0 0);
+        transform: translateX(var(--glitch-translate));
+        opacity: 0.8;
+    }
+    20% {
+        clip-path: inset(20% 0 40% 0);
+        transform: translateX(calc(var(--glitch-translate) * -1));
+        opacity: 1;
+    }
+    30% {
+        transform: none;
+        opacity: 1;
+    }
+    40% {
+        clip-path: inset(40% 0 0 0);
+    }
+    60% {
+        clip-path: inset(0 0 60% 0);
+    }
+    80% {
+        clip-path: inset(60% 0 20% 0);
+    }
+    100% {
+        clip-path: inset(0 0 0 0);
+    }
+}
