@@ -6,7 +6,7 @@ header {
 .headerComponent  {
     position: sticky;
     top: 0;
-    background-color: rgb(63, 63, 63);
+    height: 0;
 }
 
 .nav-link span{
@@ -81,7 +81,7 @@ header {
 }
 
 .navbar-nav .nav-link:hover div {
-    animation: glitch 250ms step-start alternate;
+    animation: glitch 350ms step-start;
 }
 
 .logoContainer{
