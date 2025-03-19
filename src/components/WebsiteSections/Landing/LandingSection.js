@@ -1,5 +1,5 @@
 import "./LandingSection.css"
-import Panel from "../pagePanel/pagePanel.js"
+import Panel from "../../pagePanel/Panel.js"
 import { useEffect, useRef } from "react"
 
 export default function LandingSection() {
@@ -25,10 +25,12 @@ export default function LandingSection() {
 
     return (
         <Panel>
-            <div className="mainTextContainer" ref={panelRef}>
-                <div>THIS WEBSITE</div>
-                <div className="boldText">SUCKS.</div>
-                <div className="glitchText">LETS FIX IT.</div>
+            <div className="spacer">
+                <div className="mainTextContainer" ref={panelRef}>
+                    <div>THIS WEBSITE</div>
+                    <div className="boldText">SUCKS.</div>
+                    <div className="glitchText">LETS FIX IT.</div>
+                </div>
             </div>
         </Panel>
     )

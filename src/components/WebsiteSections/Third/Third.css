@@ -1,0 +1,18 @@
+.mainTextContainer {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 7vw;
+    text-align: center;
+}
+
+.boldText {
+    font-weight: 1000;
+}
+
+.spacer {
+    width: 95vw;
+    height: calc(100vh - 5vw);
+}
