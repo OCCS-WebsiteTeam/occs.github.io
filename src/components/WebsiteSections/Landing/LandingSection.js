@@ -2,7 +2,7 @@ import "./LandingSection.css"
 import Panel from "../../pagePanel/Panel.js"
 import { useEffect, useRef } from "react"
 
-export default function LandingSection() {
+export default function LandingSection({className}) {
     const panelRef = useRef(null)
 
     useEffect(() => {
@@ -25,7 +25,7 @@ export default function LandingSection() {
 
     return (
         <Panel>
-            <div className="spacer">
+            <div className={className + " spacer"}>
                 <div className="mainTextContainer" ref={panelRef}>
                     <div>THIS WEBSITE</div>
                     <div className="boldText">SUCKS.</div>

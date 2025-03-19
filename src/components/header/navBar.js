@@ -1,8 +1,8 @@
 import './navBar.css';
 
-export default function NavBar() {
+export default function NavBar({className}) {
     return (
-            <header className="headerComponent">
+            <header className={className + " headerComponent"}>
                 <nav className="navbar navbar-expand-lg">
                     <div className="container-fluid">
                         <a href="/" className="navbar-brand logoLink stickyNav">

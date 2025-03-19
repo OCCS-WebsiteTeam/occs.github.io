@@ -1,8 +1,8 @@
 import './panel.css';
 
-export default function Panel({children}) {
+export default function Panel({children, className}) {
     return(
-        <div className="panelContent">
+        <div className={className}>
             {children}
         </div>
     )
