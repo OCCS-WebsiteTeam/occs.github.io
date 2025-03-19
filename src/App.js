@@ -1,6 +1,7 @@
-import './App.css';
+import './App.scss';
 import NavBar from './components/header/navBar.js';
 import LandingSection from './components/WebsiteSections/LandingSection.js';
+
 
 
 function App() {

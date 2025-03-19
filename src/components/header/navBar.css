@@ -1,115 +1,125 @@
-
 header {
     position: sticky;
-    text-align: left;
     top: 0;
     z-index: 100;
-    padding: 10px 20px;
 }
 
 .headerComponent {
-    z-index: 100;
-    color: white;
     background-color: black;
 }
 
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.nav-link span{
+    visibility: hidden;
+}
+
+.nav-link div {
+    top: 0;
+}
+
+.navbar-link{
+    width: fit-content;
+}
+
+.nav-link {
+    color: white;
+    font-size: 18px;
+    height: 24px;
+    font-weight: 800;
+    overflow: hidden;
+    display: block;
+    position: relative;
+    top: 0;
 }
 
 .logoContainer {
-    display: block;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    height: 50px;
+    width: 50px;
 }
 
-.logoLink {
-    display: inline-block;
-    font-size: 24px;
-    margin: 0;
+.logoContainerItem {
+    font-size: 22px;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    padding: 0;
-    margin: 0;
-}
-
-.nav-links li {
-    display: inline;
-}
-
-.nav-links a {
-    position: relative;
-    text-decoration: none;
     color: white;
-    padding: 15px 30px;
-    font-family: Arial, Helvetica, sans-serif;
-    display: inline-block;
-    overflow: hidden;
-    text-align: center;
-    font-size: large;
-    font-weight: 800;
-}
-
-.nav-links a span, .logoLink span {
     display: block;
-    cursor: pointer;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 50%;
+    text-align: center;
 }
 
-.nav-links a span:nth-child(1), .logoLink span:nth-child(1) {
+.logoContainerItem, .logoContainerItem div{
+    width: 25px;
+    height: 25px;
+}
+
+.nav-link div,
+.logoLink div .logoContainerItem div{
+    display: block;
+    position: absolute;
+}
+
+.navbar-nav .nav-link div:nth-child(1),
+.logoContainerItem div:nth-child(1) {
     color: red;
     --glitch-translate: -3px;
 }
-.nav-links a span:nth-child(2), .logoLink span:nth-child(2) {
+.navbar-nav .nav-link div:nth-child(2),
+.logoContainerItem div:nth-child(2) {
     color: blue;
     --glitch-translate: 3px;
 }
-.nav-links a span:nth-child(3), .logoLink span:nth-child(3) {
+.navbar-nav .nav-link div:nth-child(3),
+.logoContainerItem div:nth-child(3) {
     color: white;
     --glitch-translate: 0;
 }
 
-
-.nav-links a:hover span{
+.navbar-nav .nav-link:hover div {
     animation: glitch 250ms step-start alternate;
 }
 
-.logoLink span {
-    animation: glitchLogo 10s step-start infinite;
+.logoContainer{
+    animation: glitchLogoContainer 10s step-start infinite;
 }
 
-@keyframes glitchLogo {
-    0% {
-        clip-path: inset(0); /* Start fully visible */
-    }
-    95% {
-        clip-path: inset(0); /* Keep it fully visible until near the end */
+.logoContainerItem div{
+    animation: glitchLogoItem 10s step-start infinite;
+}
+
+@keyframes glitchLogoItem {
+    0%, 95% {
         transform: none;
     }
     98% {
-        clip-path: inset(20% 0 40% 0);
         transform: translateX(calc(var(--glitch-translate) * -1));
     }
     99% {
-        clip-path: inset(40% 0 0 0);
-        transform: none;
         transform: translateX(var(--glitch-translate));
     }
     100% {
-        clip-path: inset(0); /* Reset clip-path to normal */
         transform: none;
     }
 }
 
+@keyframes glitchLogoContainer {
+    0%, 95% {
+        clip-path: inset(0);
+    }
+    98% {
+        clip-path: inset(20% 0 40% 0);
+    }
+    99% {
+        clip-path: inset(40% 0 0 0);
+    }
+    100% {
+        clip-path: inset(0);
+    }
+}
 
 @keyframes glitch {
     0% {

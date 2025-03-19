@@ -7,21 +7,21 @@ export default function LandingSection() {
 
     useEffect(() => {
         if (!panelRef.current) return;
-        panelRef.current.querySelectorAll(".glitchText").forEach(el => {
-            const fonts = ["Brush Script MT", "Papyrus", "Comic Sans MS", "Lucida Handwriting", "Jokerman", "Arial"];
-            let fontIndex = 0;
-            el.style.fontFamily = fonts[fontIndex];
-        
-            const changing = setInterval(() => {
-                fontIndex++;
-                if (fontIndex >= fonts.length) {
-                    clearInterval(changing);
-                } else {
-                    el.style.fontFamily = fonts[fontIndex];
-                }
-            }, 400);
+    
+        const elements = panelRef.current.querySelectorAll(".glitchText");
+        const fonts = ["Brush Script MT", "Papyrus", "Comic Sans MS", "Lucida Handwriting", "Jokerman", "Arial"];
+    
+        fonts.forEach((font, i) => {
+            setTimeout(() => {
+                requestAnimationFrame(() => {
+                    elements.forEach(el => {
+                        el.style.fontFamily = font;
+                    });
+                });
+            }, i * 400);
         });
-    }, []) // Empty dependency array to run once
+    }, []);
+    
 
     return (
         <Panel>
