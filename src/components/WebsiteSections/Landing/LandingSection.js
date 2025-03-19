@@ -25,7 +25,7 @@ export default function LandingSection({className}) {
 
     return (
         <Panel>
-            <div className={className + " spacer"}>
+            <div className={(className || "") + " spacer"}>
                 <div className="mainTextContainer" ref={panelRef}>
                     <div>THIS WEBSITE</div>
                     <div className="boldText">SUCKS.</div>
