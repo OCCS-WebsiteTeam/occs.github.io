@@ -3,33 +3,32 @@ import { useEffect, useRef } from "react"
 
 export default function LandingSection({className}) {
     const panelRef = useRef(null)
-
     useEffect(() => {
         let delay = 750
         if (!panelRef.current) return;
-    
-        const elements = panelRef.current.querySelectorAll(".glitchText");
         const fonts = ["Brush Script MT", "Papyrus", "Comic Sans MS", "Lucida Handwriting", "Jokerman"];
-        const colors = ["red", "pink", "green", "yellow", "blue"]
-    
-        fonts.forEach((font, i) => {
-            setTimeout(() => {
-                requestAnimationFrame(() => {
-                    elements.forEach(el => {
-                        el.style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
-                        el.style.color = colors[Math.floor(Math.random() * colors.length)];
+        // const colors = ["lightgreen", "lightyellow", "lightblue", "purple", "lighpink"]
+        const things = [
+            {element: (document.querySelectorAll(".glitchText")[0]), times: 4}, 
+            {element: (document.querySelectorAll(".glitchText")[1]), times: 4}, 
+            {element: (document.querySelectorAll(".glitchText")[2]), times: 4}, 
+            {element: (document.querySelectorAll(".landing")[0]), times: 4}
+        ].forEach((el) => {
+            for(let i = 0; i < el.times; i++) {
+                setTimeout(() => {
+                    requestAnimationFrame(() => {
+                        el.element.style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
+                        // el.element.style.color = colors[Math.floor(Math.random() * colors.length)];
+                        // el.element.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                     });
-                    document.querySelector(".landing").style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                });
-            }, i * delay);
+                }, i * delay);
+            }
+            setTimeout(() => {
+                // el.element.style.backgroundColor = "black"
+                el.element.style.fontFamily = "Arial"
+                // el.element.style.color = "white"
+            }, el.times * delay)
         });
-        setTimeout(() => {
-            elements.forEach(el => {
-                el.style.fontFamily = "Arial";
-                el.style.color = "white"
-            });
-            document.querySelector(".landing").style.backgroundColor = "black"
-        }, 6 * delay);
     }, []);
 
     return (
