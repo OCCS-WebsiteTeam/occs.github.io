@@ -1,46 +1,55 @@
-import "./LandingSection.css"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react";
+import "./LandingSection.css";
 
-export default function LandingSection({className}) {
+export default function LandingSection({ className }) {
+    // GlitchTextRefs contains a list of references to the divs that the effect will be applied to
+    const glitchTextRefs = useRef([]);
 
     useEffect(() => {
         let delay = 750;
+        let times = 4;
 
         const fonts = ["Brush Script MT", "Papyrus", "Comic Sans MS", "Lucida Handwriting", "Jokerman"];
-        const colors = ["lightgreen", "lightyellow", "lightblue", "purple", "lightpink"];
-        
-        const things = [
-            { element: document.querySelectorAll(".glitchText")[0], times: 4 },
-            { element: document.querySelectorAll(".glitchText")[1], times: 4 },
-            { element: document.querySelectorAll(".glitchText")[2], times: 4 },
-            { element: document.querySelectorAll(".landing")[0], times: 4 }
-        ];
+        // Method to apply random fonts to all elements in the reference list
+        const applyRandomFont = () => {
+            glitchTextRefs.current.forEach((el) => {
+                if (el) el.style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
+            });
+        };
 
-        things.forEach((el) => {
-            for (let i = 0; i < el.times; i++) {
-                requestAnimationFrame(() => {
-                    setTimeout(() => {
-                        el.element.style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
-                        // el.element.style.color = colors[Math.floor(Math.random() * colors.length)];
-                        // el.element.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    }, i * delay);
-                });
-            }
+        // Initial randomization
+        applyRandomFont();
 
-            setTimeout(() => {
-                // el.element.style.backgroundColor = "black";
-                el.element.style.fontFamily = "Arial";
-                // el.element.style.color = "white";
-            }, el.times * delay);
-        });
-        // return () => document.head.removeChild(link);
+        // Interval for glitch effect
+        const interval = setInterval(applyRandomFont, delay);
+
+        // Clearing interval and setting back to default font
+        const timeout = setTimeout(() => {
+            clearInterval(interval);
+            glitchTextRefs.current.forEach((el) => {
+                if (el) el.style.fontFamily = "Arial";
+            });
+        }, times * delay);
+
+        // Return method to be called on final intialization
+        return () => {
+            clearInterval(interval);
+            clearTimeout(timeout);
+        };
     }, []);
+
     return (
         <div className={(className || "") + " landing"}>
             <div className="mainTextContainer">
-                <div className="glitchText">THIS WEBSITE</div>
-                <div className="boldText glitchText">SUCKS.</div>
-                <div className="glitchText">LETS FIX IT.</div>
+                <div ref={(el) => (glitchTextRefs.current[0] = el)} className="glitchText">
+                    THIS WEBSITE
+                </div>
+                <div ref={(el) => (glitchTextRefs.current[1] = el)} className="boldText glitchText">
+                    SUCKS.
+                </div>
+                <div ref={(el) => (glitchTextRefs.current[2] = el)} className="glitchText">
+                    LET'S FIX IT.
+                </div>
             </div>
         </div>
     );
