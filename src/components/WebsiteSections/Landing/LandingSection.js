@@ -13,7 +13,8 @@ export default function LandingSection({ className }) {
         // Method to apply random fonts to all elements in the reference list
         const applyRandomFont = () => {
             glitchTextRefs.current.forEach((el) => {
-                if (el) el.style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
+                const Random = Math.floor(Math.random() * fonts.length)
+                el.style.fontFamily = fonts[Random];
             });
         };
 

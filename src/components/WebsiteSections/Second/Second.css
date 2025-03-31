@@ -1,0 +1,22 @@
+.cardPositioningContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem; /* spacing between cards */
+    padding: 2rem;
+    width: 85vw;
+    height: 100vh;
+    margin: auto;
+}
+
+.card {
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    background-color: rgb(20, 20, 20);
+    height: 20vh;
+    min-width: 250px;
+    flex: 1 1 250px;
+    max-width: 300px;
+    transition-duration: 2s;
+}
