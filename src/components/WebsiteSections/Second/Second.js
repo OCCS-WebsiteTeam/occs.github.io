@@ -1,5 +1,5 @@
 import './Second.css'
-import { useEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
 
 export default function SecondPanel({ className }) {
     const cardPositioningRefs = useRef([]);
@@ -9,16 +9,16 @@ export default function SecondPanel({ className }) {
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting && entry.intersectionRatio > .75) {
-                    // Entire container is in view
                     setTimeout(() => {
-                        cardPositioningRefs.current.forEach(el => {
-                            el.style.transform = ""; // Clear the transform
-                        });
-                    }, 1500); // 3 seconds delay
+                        [...containerRef.current.children].forEach(card => {
+                            card.style.transitionDuration = "1s"
+                            card.style.transform = ""
+                        })
+                    }, 5000);
                 }
             },
             {
-                threshold: .75 // Fully visible
+                threshold: .75
             }
         );
 
@@ -29,19 +29,38 @@ export default function SecondPanel({ className }) {
         return () => observer.disconnect();
     }, []);
 
+    useLayoutEffect(() => {
+        const container = containerRef.current;
+        const cards = Array.from(container.children);
+        let firstRects = {}
+        cards.forEach(c => {firstRects[c.attributes.pos.value] = c.getBoundingClientRect()});
+        container.innerHTML = ""
+        cards.sort((a, b) => a.attributes.pos.value - b.attributes.pos.value).forEach(c => container.appendChild(c));
+        requestAnimationFrame(() => {
+            let lastRects = {}
+            cards.forEach(c => {lastRects[c.attributes.pos.value] = c.getBoundingClientRect()});
+            cards.forEach((card, i) => {
+                const dx = firstRects[i + 1].left - lastRects[i + 1].left;
+                const dy = firstRects[i + 1].top - lastRects[i + 1].top;
+                card.style.transitionDuration = "0s"
+                card.style.transform = `translate(${dx}px, ${dy}px)`;
+            });
+        });
+    }, []);
+
+
     return (
-        <div ref={containerRef} className={(className ?? "") + " cardPositioningContainer"}>
+        <div id="cardPositioningContainer" ref={containerRef} className={(className ?? "") + " cardPositioningContainer"}>
             {[
-                [11,121], [-12,32], [18,191], [14,100],
-                [13,20], [14,-30], [22,-100], [7,-123]
-            ].map((offset, index) => (
+                [6,"order"], [5,"information not being in the best"], [4,"For example:"], [3,"in website development."], [2,"to watch out for"], [1,"There are many things"]
+            ].map((pos) => (
                 <div
-                    key={index}
+                    key={pos[0]}
+                    pos={pos[0]}
                     className="card"
-                    style={{transform: `translate(${offset[0]}%, ${offset[1]}%)`}}
-                    ref={(el) => (cardPositioningRefs.current[index] = el)}
+                    ref={(el) => (cardPositioningRefs.current[pos[0]] = el)}
                 >
-                    {index === 0 ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla id dolor accumsan, egestas neque a, suscipit est." : "Content"}
+                    {pos[1]}
                 </div>
             ))}
         </div>
