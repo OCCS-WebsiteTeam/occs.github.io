@@ -51,21 +51,21 @@ export default function SecondPanel({ className }) {
 
     return (
         <div id="centerContent" className={(className ?? "") + " textPositioningContainer"}>
-            <div>
-            <span className="textBlock">There are many things to look out for when building a website. For example:</span>
-            <div id="textPositioningContainer" ref={containerRef}>
-                {[
-                    [3,"order."], [2,"not being in the right"], [1,"information"]
-                ].map((pos) => (
-                    <span
-                        key={pos[0]}
-                        pos={pos[0]}
-                        className="textBlock"
-                        ref={(el) => (cardPositioningRefs.current[pos[0]] = el)}
-                    >
-                        {pos[1]}
-                    </span>
-                ))}
+            <div id="contentContainer">
+                <span className="textBlock">There are many things to look out for when building a website. For example:</span>
+                <div id="textPositioningContainer" ref={containerRef}>
+                    {[
+                        [3,"order."], [2,"not being in the right"], [1,"Information"]
+                    ].map((pos) => (
+                        <span
+                            key={pos[0]}
+                            pos={pos[0]}
+                            className="textBlock"
+                            ref={(el) => (cardPositioningRefs.current[pos[0]] = el)}
+                        >
+                            {pos[1]}
+                        </span>
+                    ))}
                 </div>
             </div>
         </div>

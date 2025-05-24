@@ -1,18 +1,23 @@
 #centerContent {
     display: flex;
     justify-content: center;
-    padding: 10vw;
+    flex-direction: column;
     width: 85vw;
     height: 100vh;
     margin: auto;
 }
 
+#contentContainer {
+    height: min-content;
+    padding: 10vw;
+}
+
 .textBlock {
     color: white;
     font-family: Arial, sans-serif;
-    font-size: 18px;
+    font-size: 36px;
     font-weight: 900;
     background-color: black;
     display: inline-block;
-    padding-right: 5px;
+    padding-right: 10px;
 }
