@@ -1,25 +1,18 @@
-.cardPositioningContainer {
+#centerContent {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
-    padding: 2rem;
+    padding: 10vw;
     width: 85vw;
     height: 100vh;
     margin: auto;
 }
 
-.card {
+.textBlock {
     color: white;
     font-family: Arial, sans-serif;
     font-size: 18px;
     font-weight: 900;
-    background-color: rgb(10, 10, 10);
-    height: 20vh;
-    min-width: 250px;
-    flex: 1 1 250px;
-    max-width: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-color: black;
+    display: inline-block;
+    padding-right: 5px;
 }
